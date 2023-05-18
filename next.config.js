@@ -2,7 +2,7 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/',
+        source: '/en-US/login',
         destination: '/login',
         permanent: true,
       },
@@ -21,8 +21,4 @@ module.exports = {
     },
   },
   swcMinify: true,
-  i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
-  },
 };
