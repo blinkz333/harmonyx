@@ -20,10 +20,6 @@ Deploy this template using Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/earvinpiamonte/nextjs-tailwindcss-template)
 
-## Maintainer
-
-This project is maintained by [Noel Earvin Piamonte](https://www.earvinpiamonte.com).
-
 ## Credits
 
 [Deploy button image](https://vercel.com/button) used on this `README.md` is owned by [Vercel](https://vercel.com).
