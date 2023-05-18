@@ -13,7 +13,3 @@ cd harmonyx
 ```
 npm run dev
 ```
-
-## Credits
-
-[Deploy button image](https://vercel.com/button) used on this `README.md` is owned by [Vercel](https://vercel.com).
