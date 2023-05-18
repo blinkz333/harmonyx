@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import Login from "./login/index";
 import Signup from "./signup/index";
 const Home = () => {
