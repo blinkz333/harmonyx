@@ -1,10 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["components/*"],
-      "@/styles/*": ["styles/*"]
-    },
     "target": "es5",
     "lib": [
       "dom",
@@ -13,7 +8,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -27,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/_document.js", "components/Layout.js", "pages/index.js"  ],
   "exclude": [
     "node_modules"
   ]

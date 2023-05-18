@@ -1,13 +1,22 @@
 module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/login',
+        permanent: true,
+      },
+    ]
+  },
   publicRuntimeConfig: {
     site: {
-      name: 'Next.js + Tailwind CSS template',
+      name: 'Hamonyx',
       url:
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
           : 'https://earvinpiamonte-nextjs-tailwindcss-template.vercel.app',
-      title: 'Next.js + Tailwind CSS template',
-      description: 'Next.js + Tailwind CSS template',
+      title: 'Hamonyx',
+      description: 'Hamonyx',
       socialPreview: '/images/preview.png',
     },
   },
