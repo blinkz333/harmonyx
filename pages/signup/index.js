@@ -1,12 +1,13 @@
 "use client";
 import Head from "next/head";
 import Link from "next/link";
-import signUp from "../firebase/auth/signup";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import Swal from "sweetalert2";
+import { useAuth } from "../../context/AuthContext";
 
 const Signup = () => {
+  const {user , signup} = useAuth()
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirm_password, setComfirmPassword] = useState(null);
@@ -16,7 +17,8 @@ const Signup = () => {
     event.preventDefault();
 
     if (password === confirm_password) {
-      const { result, error } = await signUp(email, password);
+      const { result, error } = await signup(email, password);
+      
       if (error) {
         Swal.fire({
           icon: "error",
@@ -77,6 +79,7 @@ const Signup = () => {
                 <input
                   required
                   type="password"
+                  minLength={6}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
@@ -91,6 +94,7 @@ const Signup = () => {
                 <input
                   required
                   type="password"
+                  minLength={6}
                   onChange={(e) => setComfirmPassword(e.target.value)}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 />

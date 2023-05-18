@@ -2,18 +2,19 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import signIn from "../firebase/auth/signin";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const {user , login} = useAuth()
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const router = useRouter();
 
   const handleForm = async (event) => {
     event.preventDefault();
-    const { result, error } = await signIn(email, password);
+    const { result, error } = await login(email, password);
     if (error) {
       Swal.fire({
         icon: "error",
@@ -68,6 +69,7 @@ const Login = () => {
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  minLength={6}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
               </div>
