@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Login from "./login/index";
 import Signup from "./signup/index";
+import Dasbord from './dashbord/index'
+
 const Home = () => {
   return (
     <>
@@ -9,6 +11,9 @@ const Home = () => {
       </Link>
       <Link href={"/signup"}>
         <Signup />
+      </Link>
+      <Link href={"/dashbord"}>
+        <Dasbord />
       </Link>
     </>
   );

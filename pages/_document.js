@@ -19,6 +19,7 @@ class MyDocument extends Document {
           {/* Favicons, Google site verification and other common meta tags across the site. */}
         </Head>
         <body>
+          
           <Main />
           <NextScript />
         </body>
