@@ -7,7 +7,7 @@ Before using this template, please make sure that your development environment i
 ## Run development server
 
 ```
-cd nextjs-blog
+cd harmonyx
 ```
 
 ```
