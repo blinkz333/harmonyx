@@ -14,12 +14,6 @@ cd harmonyx
 npm run dev
 ```
 
-## Deploy with Vercel
-
-Deploy this template using Vercel:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/earvinpiamonte/nextjs-tailwindcss-template)
-
 ## Credits
 
 [Deploy button image](https://vercel.com/button) used on this `README.md` is owned by [Vercel](https://vercel.com).
