@@ -90,6 +90,31 @@ const Dashbord = () => {
                   </CardBody>
                 </Card>
                 <br />
+                <Card className="bg-[#3f98ea] rounded-md">
+                  <CardBody>
+                    <CardTitle
+                      tag="h5"
+                      className="font-bold text-[9px] text-white"
+                    >
+                      NORMAL PRIORITY
+                    </CardTitle>
+                    <div class="flex items-center">
+                      <CardText className="font-bold text-xl text-white tracking-wide">
+                        Go For A Walk
+                      </CardText>
+                      <Input
+                        className="rounded-circle ml-auto"
+                        type="checkbox"
+                      />
+                    </div>
+                    <CardSubtitle
+                      className="mt-1  text-xs text-white tracking-wide"
+                      tag="h6"
+                    >
+                      Walk a minimum of 3km today
+                    </CardSubtitle>
+                  </CardBody>
+                </Card>
               </CardColumns>
             </div>
             <div class="mt-[3rem] ml-[8rem] font-serif font-bold tracking-wide">
