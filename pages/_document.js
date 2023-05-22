@@ -17,6 +17,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* Favicons, Google site verification and other common meta tags across the site. */}
+          <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        />
         </Head>
         <body>
           

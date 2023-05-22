@@ -35,23 +35,23 @@ export const AuthContextProvider = ({ children }) => {
 
   const signup = async (email, password) => {
     let result = null,
-    error = null;
-try {
-    result = await createUserWithEmailAndPassword(auth, email, password);
-} catch (e) {
-    error = e;
-}
+      error = null;
+    try {
+      result = await createUserWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      error = e;
+    }
 
-return { result, error };
+    return { result, error };
   };
 
   const login = async (email, password) => {
     let result = null,
-        error = null;
+      error = null;
     try {
-        result = await signInWithEmailAndPassword(auth, email, password);
+      result = await signInWithEmailAndPassword(auth, email, password);
     } catch (e) {
-        error = e;
+      error = e;
     }
 
     return { result, error };
