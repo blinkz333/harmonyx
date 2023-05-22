@@ -58,14 +58,13 @@ const Dashbord = () => {
   };
 
   const _renderTask = ({ type }) => {
-    console.log(type);
     // 0 = DONE
     // 1 = TODO
 
     if (type === 1) {
       return (
         <>
-          {task.length > 0 &&
+          {task.length > 0 ? (
             task.map((items, index) => {
               if (items.priority === 1) {
                 return (
@@ -161,13 +160,34 @@ const Dashbord = () => {
                   </>
                 );
               }
-            })}
+            })
+          ) : (
+            <>
+              <Card className="bg-[#bbb9b8] rounded-md">
+                <CardBody>
+                  <CardTitle
+                    tag="h5"
+                    className="font-bold text-[9px] text-white"
+                  ></CardTitle>
+                  <div class="flex items-cente">
+                    <CardText className="font-bold text-xl text-white tracking-wide flex m-auto">
+                      NO CARD ...
+                    </CardText>
+                  </div>
+                  <CardSubtitle
+                    className="mt-1  text-xs text-white tracking-wide"
+                    tag="h6"
+                  ></CardSubtitle>
+                </CardBody>
+              </Card>
+            </>
+          )}
         </>
       );
     } else {
       return (
         <>
-          {task.length > 0 &&
+          {task.length > 0 ? (
             task.map((items, index) => {
               if (items.priority === 0) {
                 return (
@@ -201,7 +221,26 @@ const Dashbord = () => {
                   </>
                 );
               }
-            })}
+            })
+          ) : (
+            <Card className="bg-[#bbb9b8] rounded-md">
+              <CardBody>
+                <CardTitle
+                  tag="h5"
+                  className="font-bold text-[9px] text-white"
+                ></CardTitle>
+                <div class="flex items-cente">
+                  <CardText className="font-bold text-xl text-white tracking-wide flex m-auto">
+                    NO CARD ...
+                  </CardText>
+                </div>
+                <CardSubtitle
+                  className="mt-1  text-xs text-white tracking-wide"
+                  tag="h6"
+                ></CardSubtitle>
+              </CardBody>
+            </Card>
+          )}
         </>
       );
     }
