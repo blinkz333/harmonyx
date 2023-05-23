@@ -13,6 +13,13 @@ import {
   CardText,
   Button,
   Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Label,
+  Form,
 } from "reactstrap";
 
 const dayName = [
@@ -42,7 +49,13 @@ const monthNames = [
 import { useAuth } from "../../context/AuthContext";
 
 const Dashbord = () => {
+  const [modal, setModal] = useState(false);
+
   const [task, setTask] = useState([]);
+
+  const [newTask_priority, setNewTaskPriority] = useState(null);
+  const [newTask_name, setNewTaskName] = useState(null);
+  const [newTask_description, setNewTaskDescription] = useState(null);
 
   const {
     user: { uid },
@@ -246,6 +259,15 @@ const Dashbord = () => {
     }
   };
 
+  const handleSaveData = (e) => {
+    e.preventDefault();
+    console.log(newTask_priority);
+    console.log(newTask_name);
+    console.log(newTask_description);
+  };
+
+  const toggle = () => setModal(!modal);
+
   return (
     <>
       <Head>
@@ -253,13 +275,13 @@ const Dashbord = () => {
       </Head>
 
       <body>
-        <div class="flex flex-col h-screen">
+        <div class="flex flex-col h-screen ">
           <header>
             <NavbarComp />
           </header>
           <main class="flex-1 overflow-y-auto p-5">
             <div
-              class="flex flex-wrap m-auto  items-center max-w-screen-xl p-4"
+              class="flex flex-wrap m-auto items-center max-w-screen-xl "
               style={{ display: "table" }}
             >
               <div class="w-[400px] max-h-full bg-gray-100 border-gray-300 border-1 rounded-md">
@@ -276,7 +298,10 @@ const Dashbord = () => {
                       } ${new Date().getFullYear()}`}
                     </div>
                     <div class="text-3xl font-bold w-2 ml-[8rem]">
-                      <Button className="rounded-circle bg-fuchsia-500 font-bold border-0 hover:bg-fuchsia-300">
+                      <Button
+                        onClick={toggle}
+                        className="rounded-circle bg-fuchsia-500 font-bold border-0 hover:bg-fuchsia-800 focus:bg-fuchsia-500 outline-0"
+                      >
                         +
                       </Button>
                     </div>
@@ -316,6 +341,72 @@ const Dashbord = () => {
               </div>
             </div>
           </main>
+
+          <Modal isOpen={modal} toggle={toggle}>
+            <ModalHeader className="font-bold text-2xl">ADD TODO</ModalHeader>
+            <Form onSubmit={(e) => handleSaveData(e)}>
+              <ModalBody>
+                <FormGroup>
+                  <Label className="font-bold">PRIORITY</Label>
+                  <Input
+                    type="select"
+                    name="category"
+                    required
+                    defaultValue=""
+                    onChange={(e) =>
+                      e.target.value
+                        ? setNewTaskPriority(parseInt(e.target.value))
+                        : ""
+                     
+                    }
+                  >
+                    <option value="" disabled>
+                      Select priority
+                    </option>
+                    <option value={"1"}>HIGH</option>
+                    <option value={"2"}>NORMAL</option>
+                    <option value={"3"}>LOW</option>
+                  </Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleEmail">Todo Name : </Label>
+                  <Input
+                    id="todo_name"
+                    name="todo_name"
+                    placeholder="Todo name..."
+                    type="text"
+                    required
+                    value={newTask_name}
+                    onChange={(e) => setNewTaskName(e.target.value )}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleEmail">Description : </Label>
+                  <Input
+                    id="todo_description"
+                    name="todo_description"
+                    placeholder="Description..."
+                    type="text"
+                    value={newTask_description}
+                    onChange={(e) =>
+                      setNewTaskDescription(e.target.value)
+                    }
+                  />
+                </FormGroup>
+              </ModalBody>
+              <ModalFooter>
+                <Button className=" bg-green-500 font-bold border-0 hover:bg-green-800 focus:hover:bg-green-800">
+                  Save
+                </Button>
+                <Button
+                  className=" bg-red-500 font-bold border-0 hover:bg-red-800 focus:hover:bg-red-800"
+                  onClick={toggle}
+                >
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Form>
+          </Modal>
         </div>
       </body>
     </>
