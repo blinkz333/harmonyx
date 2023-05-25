@@ -68,8 +68,10 @@ const Dashbord = () => {
   }, []);
 
   const fetchData = async () => {
-    const doc = await getDocument(uid);
-    setTask(doc);
+    if(uid){
+      const doc = await getDocument(uid);
+      setTask(doc);
+    }
   };
 
   const _renderTask = ({ type }) => {
