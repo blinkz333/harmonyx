@@ -316,7 +316,7 @@ const Dashbord = () => {
   return (
     <>
       <Head>
-        <title>Hamonyx - Home</title>
+        <title>HamonyX - Home</title>
       </Head>
 
       <body>

@@ -48,7 +48,7 @@ const Signup = () => {
   return (
     <>
       <Head>
-        <title>Hamonyx - Signup</title>
+        <title>HamonyX - Signup</title>
       </Head>
       <Fragment>
         <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">

@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Hamonyx - Login</title>
+        <title>HamonyX - Login</title>
       </Head>
       <Fragment>
         <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
