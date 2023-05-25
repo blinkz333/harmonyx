@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Fragment, useState, useEffect } from "react";
 import NavbarComp from "../../components/navbar";
-import { getDocument } from "../../config/store";
+import { getDocument, InsertDocument, updateToDone } from "../../config/store";
 
 import {
   Card,
@@ -21,6 +21,8 @@ import {
   Label,
   Form,
 } from "reactstrap";
+
+import Swal from "sweetalert2";
 
 const dayName = [
   "Sunday",
@@ -97,6 +99,7 @@ const Dashbord = () => {
                           <Input
                             className="rounded-circle ml-auto"
                             type="checkbox"
+                            onClick={() => handleUpdateDone(index)}
                           />
                         </div>
                         <CardSubtitle
@@ -128,6 +131,7 @@ const Dashbord = () => {
                           <Input
                             className="rounded-circle ml-auto"
                             type="checkbox"
+                            onClick={() => handleUpdateDone(index)}
                           />
                         </div>
                         <CardSubtitle
@@ -159,6 +163,7 @@ const Dashbord = () => {
                           <Input
                             className="rounded-circle ml-auto"
                             type="checkbox"
+                            onClick={() => handleUpdateDone(index)}
                           />
                         </div>
                         <CardSubtitle
@@ -211,7 +216,7 @@ const Dashbord = () => {
                           tag="h5"
                           className="font-bold text-[9px] text-white"
                         >
-                          LOW PRIORITY
+                          Done
                         </CardTitle>
                         <div class="flex items-center">
                           <CardText className="font-bold text-xl text-white tracking-wide">
@@ -220,6 +225,8 @@ const Dashbord = () => {
                           <Input
                             className="rounded-circle ml-auto"
                             type="checkbox"
+                            checked
+                            disabled
                           />
                         </div>
                         <CardSubtitle
@@ -259,11 +266,47 @@ const Dashbord = () => {
     }
   };
 
-  const handleSaveData = (e) => {
+  const handleSaveData = async (e) => {
     e.preventDefault();
-    console.log(newTask_priority);
-    console.log(newTask_name);
-    console.log(newTask_description);
+    const obj = {
+      priority: newTask_priority,
+      title: newTask_name,
+      description: newTask_description,
+    };
+
+    const results = await InsertDocument(uid, obj);
+    if (results) {
+      Swal.fire({
+        icon: "success",
+        title: "บันทึกข้อมูลเรียบร้อย",
+        confirmButtonText: "ตกลง",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setModal(!modal);
+          const clone_task = [...task];
+          clone_task.push(obj);
+          setTask(clone_task);
+          setNewTaskPriority(null);
+          setNewTaskName(null);
+          setNewTaskDescription(null);
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "ข้อผิดพลาด...",
+        text: "ไม่สามารถบันทึกข้อมูลได้!",
+      });
+    }
+  };
+
+  const handleUpdateDone = async (index) => {
+    const results = updateToDone(uid, index);
+    if(results){
+      const clone_task = [...task];
+      clone_task[index].priority = 0
+      setTask(clone_task);
+    }
   };
 
   const toggle = () => setModal(!modal);
@@ -357,7 +400,6 @@ const Dashbord = () => {
                       e.target.value
                         ? setNewTaskPriority(parseInt(e.target.value))
                         : ""
-                     
                     }
                   >
                     <option value="" disabled>
@@ -377,7 +419,7 @@ const Dashbord = () => {
                     type="text"
                     required
                     value={newTask_name}
-                    onChange={(e) => setNewTaskName(e.target.value )}
+                    onChange={(e) => setNewTaskName(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -388,9 +430,7 @@ const Dashbord = () => {
                     placeholder="Description..."
                     type="text"
                     value={newTask_description}
-                    onChange={(e) =>
-                      setNewTaskDescription(e.target.value)
-                    }
+                    onChange={(e) => setNewTaskDescription(e.target.value)}
                   />
                 </FormGroup>
               </ModalBody>

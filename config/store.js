@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
@@ -31,4 +31,52 @@ const getDocument = async (id) => {
   }
 };
 
-export { getDocument };
+const InsertDocument = async (id, data) => {
+  const db = getFirestore(app);
+  const id_Ref = doc(db, "todo", id);
+  const idSnap = await getDoc(id_Ref);
+
+  if (idSnap.exists()) {
+    // Case Update
+    const clone_oldTask = [...idSnap.data().task]
+    clone_oldTask.push(data)
+    try {
+      await setDoc(doc(db, "todo", id), { task: clone_oldTask });
+    } catch (error) {
+      return false
+    } finally {
+      return true
+    }
+
+  } else {
+    // Case New
+    const obj = [];
+    obj.push(data);
+    try {
+      await setDoc(doc(db, "todo", id), { task: obj });
+    } catch (error) {
+      return false
+    } finally {
+      return true
+    }
+  }
+};
+
+const updateToDone = async (id , index) => {
+  const db = getFirestore(app);
+  const id_Ref = doc(db, "todo", id);
+  const idSnap = await getDoc(id_Ref);
+
+  const clone_oldTask = [...idSnap.data().task]
+  clone_oldTask[index].priority = 0
+    try {
+      await setDoc(doc(db, "todo", id), { task: clone_oldTask });
+    } catch (error) {
+      return false
+    } finally {
+      return true
+    }
+ 
+}
+
+export { getDocument, InsertDocument , updateToDone };
