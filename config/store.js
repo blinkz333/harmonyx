@@ -38,16 +38,15 @@ const InsertDocument = async (id, data) => {
 
   if (idSnap.exists()) {
     // Case Update
-    const clone_oldTask = [...idSnap.data().task]
-    clone_oldTask.push(data)
+    const clone_oldTask = [...idSnap.data().task];
+    clone_oldTask.push(data);
     try {
       await setDoc(doc(db, "todo", id), { task: clone_oldTask });
     } catch (error) {
-      return false
+      return false;
     } finally {
-      return true
+      return true;
     }
-
   } else {
     // Case New
     const obj = [];
@@ -55,28 +54,27 @@ const InsertDocument = async (id, data) => {
     try {
       await setDoc(doc(db, "todo", id), { task: obj });
     } catch (error) {
-      return false
+      return false;
     } finally {
-      return true
+      return true;
     }
   }
 };
 
-const updateToDone = async (id , index) => {
+const updateToDone = async (id, index) => {
   const db = getFirestore(app);
   const id_Ref = doc(db, "todo", id);
   const idSnap = await getDoc(id_Ref);
 
-  const clone_oldTask = [...idSnap.data().task]
-  clone_oldTask[index].priority = 0
-    try {
-      await setDoc(doc(db, "todo", id), { task: clone_oldTask });
-    } catch (error) {
-      return false
-    } finally {
-      return true
-    }
- 
-}
+  const clone_oldTask = [...idSnap.data().task];
+  clone_oldTask[index].priority = 0;
+  try {
+    await setDoc(doc(db, "todo", id), { task: clone_oldTask });
+  } catch (error) {
+    return false;
+  } finally {
+    return true;
+  }
+};
 
-export { getDocument, InsertDocument , updateToDone };
+export { getDocument, InsertDocument, updateToDone };

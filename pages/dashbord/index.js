@@ -302,9 +302,9 @@ const Dashbord = () => {
 
   const handleUpdateDone = async (index) => {
     const results = updateToDone(uid, index);
-    if(results){
+    if (results) {
       const clone_task = [...task];
-      clone_task[index].priority = 0
+      clone_task[index].priority = 0;
       setTask(clone_task);
     }
   };
